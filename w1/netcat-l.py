@@ -11,19 +11,19 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((host, port))
 s.listen(backlog)
 
-conn, clientaddress = s.accept()
-
-data=b""
-newdata = conn.recv(size)
-
-while newdata:
-    data += newdata
+for i in range(0, 3):
+    conn, clientaddress = s.accept()
+    data=b""
     newdata = conn.recv(size)
     
-if data:
-    datastring = data.decode("utf-8")
-    print(datastring)
-
-conn.close()
+    while newdata:
+        data += newdata
+        newdata = conn.recv(size)
+        
+    if data:
+        datastring = data.decode("utf-8")
+        print(datastring)
+        
+    conn.close()
 s.close()
 
