@@ -3,5 +3,13 @@
 import socket
 
 s = socket.create_connection(("localhost", 42424))
-s.sendall("Shkeputu".encode("utf-8"))
+
+spamming = ""
+for i in range(1, 1000):
+    spamming += "spam " + str(i) + "\n"
+
+encodedSpam = spamming.encode("utf-8") 
+
+s.sendall(encodedSpam)
+
 s.close()
