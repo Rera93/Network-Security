@@ -16,17 +16,20 @@ def handle(passedconn)
         
     passedconn.close()
 
-host = "localhost"
-port = 42424
-size = 1024
-backlog = 5
+def main():
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.bind((host, port))
+    s.listen(backlog)
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.bind((host, port))
-s.listen(backlog)
+    for i in range(0, 3):
+        conn, clientaddress = s.accept()
+        handle(conn)
+    s.close()
 
-for i in range(0, 3):
-    conn, clientaddress = s.accept()
-    handle(conn)
-s.close()
+if __name__ = "__main__":
+    host = "localhost"
+    port = 42424
+    size = 1024
+    backlog = 5
+    main()
 
