@@ -13,8 +13,13 @@ s.listen(backlog)
 
 conn, clientaddress = s.accept()
 
-data = conn.recv(size)
+data=b""
+newdata = conn.recv(size)
 
+while newdata:
+    data += newdata
+    newdata = conn.recv(size)
+    
 if data:
     datastring = data.decode("utf-8")
     print(datastring)
