@@ -2,6 +2,20 @@
 
 import socket
 
+def handle(passedconn)
+   data=b""
+    newdata = passedconn.recv(size)
+    
+    while newdata:
+        data += newdata
+        newdata = passedconn.recv(size)
+        
+    if data:
+        datastring = data.decode("utf-8")
+        print(datastring)
+        
+    passedconn.close()
+
 host = "localhost"
 port = 42424
 size = 1024
@@ -13,17 +27,6 @@ s.listen(backlog)
 
 for i in range(0, 3):
     conn, clientaddress = s.accept()
-    data=b""
-    newdata = conn.recv(size)
-    
-    while newdata:
-        data += newdata
-        newdata = conn.recv(size)
-        
-    if data:
-        datastring = data.decode("utf-8")
-        print(datastring)
-        
-    conn.close()
+    handle(conn)
 s.close()
 
