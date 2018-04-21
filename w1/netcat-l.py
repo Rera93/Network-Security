@@ -12,7 +12,8 @@ def handle(passedconn, conn_number):
         
     if data:
         datastring = data.decode("utf-8")
-        print(datastring)
+        filter_out_spam = datastring.replace("spam ", "")
+        print(filter_out_spam)
         
     passedconn.close()
     print("Connection " + str(conn_number + 1) + " has terminated.\n")
