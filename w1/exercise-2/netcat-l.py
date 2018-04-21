@@ -6,7 +6,7 @@ import sys
 def handle_data(udp_socket):
     while(1):
         non_decoded_data, client_address = udp_socket.recvfrom(size)
-        decoded_data = non_decoded_data("utf-8")
+        decoded_data = non_decoded_data.decode("utf-8")
         if decoded_data:
             confirm_with_client = "Message: " + decoded_data + " || SUCCESS ||"
         else:
