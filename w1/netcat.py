@@ -11,5 +11,6 @@ for i in range(1, 1000):
 encodedSpam = spamming.encode("utf-8") 
 
 s.sendall(encodedSpam)
+print("Encoded message was sent to listening side")
 
 s.close()
