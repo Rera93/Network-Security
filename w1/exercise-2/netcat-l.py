@@ -15,7 +15,7 @@ def handle_data(udp_socket):
         print("[ " + client_address[0] + ", " + str(client_address[1]) + " ] said " + decoded_data + ".\n")
 def main():
     try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         print("\nUDP socket is created...\n")
     except(socket.error):
         print("\nFailed to create UDP socket. \n")

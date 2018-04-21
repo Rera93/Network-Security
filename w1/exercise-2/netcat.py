@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
 
 import socket
+import sys
 
-s = socket.create_connection(("localhost", 42424))
+def main():
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        print("\nUDP socket is created...\n")
+    except(socket.error):
+        print("\nFailed to create UDP socket. \n")
+        sys.exit()
 
-spamming = ""
-for i in range(1, 1000):
-    spamming += "spam " + str(i) + "\n"
+    s.close()
 
-encodedSpam = spamming.encode("utf-8") 
-
-s.sendall(encodedSpam)
-print("Encoded message was sent to listening side")
-
-s.close()
+if __name__ == "__main__":  
+    host = "localhost"
+    port = 424242
+    size = 65507
+    main()
