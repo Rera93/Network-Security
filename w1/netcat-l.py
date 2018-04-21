@@ -2,6 +2,16 @@
 
 import socket
 
+def handlestring(datastring, length, delimiter):
+    stringlist = datastring.split(sep=delimiter)
+    filteredlist = []
+
+    for substring in stringlist:
+        filteredlist.append(substring[length:])
+    
+    filteredstring = delimiter.join(filteredlist)
+    return filteredstring
+
 def handle(passedconn, conn_number):
     data=b""
     newdata = passedconn.recv(size)
@@ -12,7 +22,12 @@ def handle(passedconn, conn_number):
         
     if data:
         datastring = data.decode("utf-8")
-        filter_out_spam = datastring.replace("spam ", "")
+        
+        # Without slicing 
+        # filter_out_spam = datastring.replace("spam ", "")
+
+        # With slicing
+        filter_out_spam = handlestring(datastring, len("spam "), "\n")
         print(filter_out_spam)
         
     passedconn.close()
