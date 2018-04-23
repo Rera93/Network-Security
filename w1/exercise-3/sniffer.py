@@ -10,6 +10,10 @@ def parse_udp(packet):
 
     (source_port, dest_port, data_length, checksum) = struct.unpack("!HHHH", header)
 
+    print("Source Port: {} \n"
+          "Destination Port: {}\n"
+          "Data Length: {}\n"
+          "Checksum: {}\n".format(source_port, dest_port, data_length, checksum))
     
 def main():
     s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_UDP)
