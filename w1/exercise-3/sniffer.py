@@ -10,10 +10,11 @@ def parse_udp(packet):
 
     (source_port, dest_port, data_length, checksum) = struct.unpack("!HHHH", header)
 
+    
 def main():
     s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_UDP)
     while(1):
-        print(s.recvfrom(size))
+        parse_udp(s.recvfrom(size))
 
 if __name__ == "__main__":
     size = 66565 
