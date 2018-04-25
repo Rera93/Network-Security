@@ -18,7 +18,8 @@ def parse_udp(packet):
 def main():
     s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_UDP)
     while(1):
-        parse_udp(s.recvfrom(size))
+        packet, address = s.recvfrom(size)
+        parse_udp(packet)
 
 if __name__ == "__main__":
     size = 66565 
