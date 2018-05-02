@@ -26,6 +26,8 @@ def main():
         # client_packet = bytes object representing the data received
         # address = address of the socket sending the data
         client_packet, address = s.recvfrom(size)
+        header_length, ip_header_content, ip_data = parse_ip(client_packet)
+        source_port, dest_port, data_length, checksum, data = parse_udp(ip_header_content)        
 
 
 
