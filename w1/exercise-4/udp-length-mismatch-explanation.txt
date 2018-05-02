@@ -1,0 +1,4 @@
+According to the RFC768, the UDP states that the data length consists of
+the size of the header plus the size of the data. Consequently, the size of 
+data will exclude the size of the header. Therefore, the size of the data will
+be 8 bytes less than the data length since it excludes the size of header(== 8 bytes)
