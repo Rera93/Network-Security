@@ -1,27 +1,37 @@
-#!usr/bin/env python3
+#!/usr/bin/env python3
 
 import socket
 import struct
 
 def parse_udp(packet):
-    header_start = 0
     header_length = 8
-    header = packet[header_start:header_start+header_length]
+    header = packet[:header_length]
+    data = packet[header_length:]
 
-    (source_port, dest_port, data_length, checksum) = struct.unpack("!HHHH", header)
+    (source_port, dest_port,
+     data_length, checksum) = struct.unpack("!HHHH", header)
 
-    print("Source Port: {} \n"
-          "Destination Port: {}\n"
-          "Data Length: {}\n"
-          "Checksum: {}\n".format(source_port, dest_port, data_length, checksum))
-    
+    return source_port, dest_port, data_length, checksum, data
+
+def parse_ip(packet):
+    header_length_in_bytes = (packet[0] & 0x0F) * 4
+    header = packet[:header_length_in_bytes]
+    data = packet[header_length_in_bytes:]
+    return header_length_in_bytes, header, data
+
 def main():
     s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_UDP)
-    while(1):
-        packet, address = s.recvfrom(size)
-        parse_udp(packet)
+
+    while True:
+        # client_packet = bytes object representing the data received
+        # address = address of the socket sending the data
+        client_packet, address = s.recvfrom(size)
+
+
+
+
 
 if __name__ == "__main__":
-    size = 66565 
+    size = 65565
+    host = "localhost"
     main()
-    
