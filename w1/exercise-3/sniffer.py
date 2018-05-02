@@ -16,8 +16,16 @@ def parse_udp(packet):
 def parse_ip(packet):
     header_length_in_bytes = (packet[0] & 0x0F) * 4
     header = packet[:header_length_in_bytes]
+
+    unpacked_header = struct.unpack('!BBHHHBBH4s4s', header)
+
+    total_length = unpacked_header[2]
+    protocol = unpacked_header[6]
+    source_address = unpacked_header[8]
+    dest_address = unpacked_header[9]
+
     data = packet[header_length_in_bytes:]
-    return header_length_in_bytes, header, data
+    return header_length_in_bytes, header, total_length, protocol, source_address, dest_address, data
 
 def main():
     s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_UDP)
