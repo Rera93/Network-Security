@@ -65,6 +65,18 @@ def main():
         # address = address of the socket sending the data
         client_packet, address = s.recvfrom(size)
 
+        dest_mac_address, source_mac_address, tag, eth_type = parse_ethernet(client_packet)
+
+        print("Destination MAC Address: {}\n"
+              "Source MAC Address: {}\n"
+              "Ethernet Type: {}".format(
+                  convert_to_mac_address(dest_mac_address),
+                  convert_to_mac_address(source_mac_address),
+                  eth_type))
+
+        if(tag != ''):
+            print("Tag: {}\n".format(tag))
+
 #        header_length, ip_header_content, total_length, protocol, source_address, dest_address, ip_data = parse_ip(client_packet)
 #
 #        print("### IP Header ###\n"
