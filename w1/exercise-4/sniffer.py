@@ -27,7 +27,12 @@ def parse_ethernet(packet):
         eth_type = unpacked_eth_header[2]
 
     return dest_mac_address, source_mac_address, tag, eth_type
+
+def convert_to_mac_address(byte_address):
     
+    mac_address_format = ":".split(map("{02X}".format, byte_address))
+    return mac_address_format
+
 def parse_udp(packet):
     header_length = 8
     header = packet[:header_length]
