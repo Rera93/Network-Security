@@ -41,7 +41,7 @@ def main():
               "Total Length: {}\nProtocol: {}\n"
               "Source IP Address: {}\n"
               "Destination IP Address: {}\n".format(
-                  total_length, protocol, source_address, dest_address))
+                  total_length, protocol, socket.inet_ntoa(source_address), socket.inet_ntoa(dest_address)))
 
         source_port, dest_port, data_length, checksum, udp_data = parse_udp(ip_header_content)        
         print("Source Port: {}\nDestination Port: {}\n"
