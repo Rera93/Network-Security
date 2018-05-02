@@ -27,8 +27,10 @@ def main():
         # address = address of the socket sending the data
         client_packet, address = s.recvfrom(size)
         header_length, ip_header_content, ip_data = parse_ip(client_packet)
-        source_port, dest_port, data_length, checksum, data = parse_udp(ip_header_content)        
-
+        source_port, dest_port, data_length, checksum, udp_data = parse_udp(ip_header_content)        
+        print("Source Port: {}\nDestination Port: {}\n"
+              "Data Length: {}\nChecksum: {}\nUDP Data: {}\n".format(
+                  source_port, dest_port, data_length, checksum, udp_data))
 
 
 
