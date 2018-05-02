@@ -3,6 +3,31 @@
 import socket
 import struct
 
+def parse_ethernet(packet):
+    
+    hypothetical_tag = packet[12:14]
+
+    if(hypothetical_tag == b'\x81\x00'):
+        
+        eth_header_length = 18 
+        unpacked_eth_header = struct.unpack('!6s6s4sH', packet[:eth_header_length])
+
+        dest_mac_address = unpacked_eth_header[0]
+        source_mac_address = unpacked_eth_header[1]
+        tag = unpacked_eth_header[2]
+        eth_type = unpacked_eth_header[3]
+    else:
+        
+        eth_header_length = 14 
+        unpacked_eth_header = struct.unpack('!6s6sH', packet[:eth_header_length])
+
+        dest_mac_address = unpacked_eth_header[0]
+        source_mac_address = unpacked_eth_header[1]
+        tag = ''
+        eth_type = unpacked_eth_header[2]
+
+    return dest_mac_address, source_mac_address, tag, eth_type
+    
 def parse_udp(packet):
     header_length = 8
     header = packet[:header_length]
