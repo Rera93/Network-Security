@@ -34,7 +34,15 @@ def main():
         # client_packet = bytes object representing the data received
         # address = address of the socket sending the data
         client_packet, address = s.recvfrom(size)
-        header_length, ip_header_content, ip_data = parse_ip(client_packet)
+
+        header_length, ip_header_content, total_length, protocol, source_address, dest_address, ip_data = parse_ip(client_packet)
+
+        print("### IP Header ###\n"
+              "Total Length: {}\nProtocol: {}\n"
+              "Source IP Address: {}\n"
+              "Destination IP Address: {}\n".format(
+                  total_length, protocol, source_address, dest_address))
+
         source_port, dest_port, data_length, checksum, udp_data = parse_udp(ip_header_content)        
         print("Source Port: {}\nDestination Port: {}\n"
               "Data Length: {}\nChecksum: {}\nUDP Data: {}\n".format(
