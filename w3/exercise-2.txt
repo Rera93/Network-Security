@@ -1,1 +1,5 @@
-There are 65536 tcp/udp ports which you could choose from. This number gets a bit smaller if you consider that the first 1024 ports (also called well-known ports) are already reserved for certain services. Nearly every port above 1024 can be used for custom services and are not reserved. Given this information, an administrator could ignore this convention and just use port 80 for his ssh service on his server. He could edit the sshd-config file or use iptables for that: ``` iptables -t nat -I PREROUTING --src 0/0 --dst YOURSERVERIP -p tcp --dport 80 -j REDIRECT --to-ports 22 ```
+In total, there are 65536 TCP/UDP ports that can be choosen from. Considering that the first 1024 ports ("well-known ports") are reserved for specific services, the number of TCP/UDP ports gets smaller.  Almost, every port above 1024 may be used for specific services and may not be reserved. An ADMIN having this info could ignore the above convention and just use port 80 for his/her SSH service on the server. The sshd-config file could be modified or iptables could be used. 
+
+For example: 
+
+ ``` iptables -t nat -I PREROUTING --src 0/0 --dst YOURSERVERIP -p tcp --dport 80 -j REDIRECT --to-ports 22 ```
