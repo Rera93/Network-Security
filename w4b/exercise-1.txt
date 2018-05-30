@@ -1,1 +1,3 @@
 a) When the destination address of a packet is not matched by any of the rules of the routing table, then the packet will be sent through the default route containing a destionation address of 0.0.0.0.
+
+b) Route 9 indicates that all the packets with destination IP address 145.116.128.0/22 are on the same network as we are since there is no gateway and the packet is sent directly to the wlp3s0 interfaces.
