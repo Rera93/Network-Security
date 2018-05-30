@@ -12,6 +12,6 @@ Route 6 is valid for dest IP address 192.168.0.0/16 where the first 2 bytes are 
 
 c) Route 3 has no gateway so the packet will directly traverse to its destination over the tap0 interface. 
 
-d) Route 8 
+d) Route 8 defines that packets with a destionation IP address 131.174.117.20 will traverse though the gateway 145.116.128.1 over the wlp3s0 interface. The destination IP address corrensponds to the DNS IP address as stated from the DHCP leases while the gateway matches the router ip address. Without route 8 no packets would be sent to the DNS through the router.    
 
 e) Route 10 sends packets with destination address being the IP address of the VPN machine through the gateway 145.116.128.1 being the router IP address. If this route was not provided on the routing table than no connection to the VPN would be established.
