@@ -16,7 +16,6 @@ A) What does a NAT do with inbound ICMP Error messages which do belong to an exi
            be same as the source IP address of the embedded packet
            after translation.
 
-
 B) Why does a NAT drop inbound ICMP Error messages which do not belong to an existing NAT
    session? (Receives an ICMP Error packet from an external realm)
 
