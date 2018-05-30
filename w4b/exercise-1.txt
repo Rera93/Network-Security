@@ -1,0 +1,1 @@
+a) When the destination address of a packet is not matched by any of the rules of the routing table, then the packet will be sent through the default route containing a destionation address of 0.0.0.0.
