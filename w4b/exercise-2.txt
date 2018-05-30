@@ -3,7 +3,7 @@ uses the packet embedded within the ICMP Error message to look up the NAT Sessio
 (Using the key words "MUST" and "SHOULD" as described in RFC 5508 termonology)
 
 A) What does a NAT do with inbound ICMP Error messages which do belong to an existing NAT
-   session, and why?
+   session, and why? (Receives an ICMP Error packet from an external realm)
 
     Then the NAT device MUST use the matching NAT Session to translate the embedded packet; which consists of the following:
         -- Revert the IP and transport headers of the embedded IP
@@ -18,12 +18,12 @@ A) What does a NAT do with inbound ICMP Error messages which do belong to an exi
 
 
 B) Why does a NAT drop inbound ICMP Error messages which do not belong to an existing NAT
-   session?
+   session? (Receives an ICMP Error packet from an external realm)
 
     The NAT SHOULD silently drop the ICMP Error packet, because the NAT device does not have an active mapping for the embedded packet.     (e.g. most of the time these ICMP Error messages are used as malicious attacks)
     
 C) What does a NAT do with outbound ICMP Error messages which do belong to an existing NAT
-   session, and why?
+   session, and why? (Receives an ICMP Error packet from an private realm)
 
     Then the NAT device MUST use the matching NAT Session to translate the embedden packet; which consists of the following:
         -- Revert the IP and transport headers of the embedded IP
@@ -40,7 +40,7 @@ C) What does a NAT do with outbound ICMP Error messages which do belong to an ex
            ICMP Error packet with its own public IP address.
 
 D) Why does a NAT drop outbound ICMP Error messages which do not belong to an existing NAT
-   session?
+   session? (Receives an ICMP Error packet from an private realm)
 
      The NAT SHOULD silently drop the ICMP Error packet, because the NAT device does not have an active mapping for the embedded packet.      (e.g. most of the time these ICMP Error messages are used as malicious attacks)
 
