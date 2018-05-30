@@ -1,3 +1,7 @@
-a) When the destination address of a packet is not matched by any of the rules of the routing table, then the packet will be sent through the default route containing a destionation address of 0.0.0.0.
+a) When the destination address of a packet is not matched by any of the rules of the routing table, then the packet will be sent through the default route containing a destionation address of 0.0.0.0/0.
 
-b) Route 9 indicates that all the packets with destination IP address 145.116.128.0/22 are on the same network as we are since there is no gateway and the packet is sent directly to the wlp3s0 interfaces.
+b) Route 9 indicates that all the packets with destination IP address 145.116.128.0/22 are on the same network as we are since there is no gateway and the packet is sent directly to the wlp3s0 interfaces. The absence of a gateway can be observed also from the G flag missing from the flags column. 
+
+Routes 4 - 6 will pass through the 145.116.128.1 gateway over the wlp3s0 interface. In these routes the G flag is present. The destination IP addresses per packet are different between routes 4-6. 
+
+Route 4 is valid for dest IP address 10.0.0.0/8 where the first byte is fixed while the other 3 bytes are not fixed and can very between 0-255 per byte. 
