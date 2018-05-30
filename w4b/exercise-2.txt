@@ -1,20 +1,47 @@
-a) In case the inbound ICMP Error messages belong to an exisiting NAT session then the following should happen: 
+General idea: when the NAT device receives the ICMP Error packet, the NAT device
+uses the packet embedded within the ICMP Error message to look up the NAT Session to which the embedded packet belongs.
+(Using the key words "MUST" and "SHOULD" as described in RFC 5508 termonology)
 
--- The destination IP address of the outer IP header should be changed to be equal to the source IP address of the embedded packet after translation
--- With the usage of matching mapping, the IP and transport headers of the embedded IP packet should be reverted to their original value
--- The ICMP Error type and code should be left unchanged
+A) What does a NAT do with inbound ICMP Error messages which do belong to an existing NAT
+   session, and why? (Receives an ICMP Error packet from an external realm)
 
-With this approach, the possibility for the information contained by the ICMP error message to be malicious is minimized.
+    Then the NAT device MUST use the matching NAT Session to translate the embedded packet; which consists of the following:
+        -- Revert the IP and transport headers of the embedded IP
+           packet to their original form, using the matching mapping;
+           and
 
-b) ICMP Error messages provide an error response in case a preceding IP packet that was sent is unable to reach it's host. When the IP packed was initially sent, a NAT session is established stating that the incomming ICMP error message can be trusted. However, these are cases when an incoming ICMP Error message does not have a preceding IP packet, so no NAT session is established to guarantee the safety of the ICMP error message. Most of the time these ICMP error messages are used as malicious attacks and they should be dropped.  
+        -- Leave the ICMP Error type and code unchanged; and
 
-c) In case the outbound ICMP Error messages belong to an exisiting NAT session then the following should happen:
+        -- Modify the destination IP address of the outer IP header to
+           be same as the source IP address of the embedded packet
+           after translation.
 
--- With the usage of matching mapping, the IP and transport headers of the embedded IP packet should be reverted to their original value
--- The ICMP Error type and code should be left unchanged
--- The source IP address of the ICMP error message should be translate to the public IP address in the mapping. This happens only if the NAT imposes the Basic NAT function && NAT has active mapping for the IP address which sent the ICMP error message.
+B) Why does a NAT drop inbound ICMP Error messages which do not belong to an existing NAT
+   session? (Receives an ICMP Error packet from an external realm)
 
-d) Since there is no preceding event which might have caused the generation of the ICMP Error Message, there is a high probability that the ICMP error message is malicious. Therefore, the outbound ICMP Error messages without an existing NAT session should be dropped. 
+    The NAT SHOULD silently drop the ICMP Error packet, because the NAT device does not have an active mapping for the embedded packet.     (e.g. most of the time these ICMP Error messages are used as malicious attacks)
+    
+C) What does a NAT do with outbound ICMP Error messages which do belong to an existing NAT
+   session, and why? (Receives an ICMP Error packet from an private realm)
+
+    Then the NAT device MUST use the matching NAT Session to translate the embedden packet; which consists of the following:
+        -- Revert the IP and transport headers of the embedded IP
+           packet to their original form, using the matching mapping;
+           and
+
+        -- Leave the ICMP Error type and code unchanged; and
+
+        -- If the NAT enforces Basic NAT function [NAT-TRAD], and the
+           NAT has active mapping for the IP address that sent the
+           ICMP Error, translate the source IP address of the ICMP
+           Error packet with the public IP address in the mapping. In
+           all other cases, translate the source IP address of the
+           ICMP Error packet with its own public IP address.
+
+D) Why does a NAT drop outbound ICMP Error messages which do not belong to an existing NAT
+   session? (Receives an ICMP Error packet from an private realm)
+
+     The NAT SHOULD silently drop the ICMP Error packet, because the NAT device does not have an active mapping for the embedded packet.      (e.g. most of the time these ICMP Error messages are used as malicious attacks)
 
 e) Some possible security concerns: 
 
