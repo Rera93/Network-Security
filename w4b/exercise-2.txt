@@ -23,3 +23,7 @@ e) Some possible security concerns:
 -- A bogus source might send malignant ICMP Error Messages for the active sessions of NAT. The purpose would be to crush these sessions. According to Req-6, this attack can be mitigated by guaranteeing that the ICMP error message does not refresh or delete the NAT session.  
 
 -- Admins may decide not send ICMP error messages from the NAT device. This may serve as a confirmation to the attacker that the attack went through. As a consequence, the decision to send specific ICMP Error messages is left to the admins of NAT. 
+
+f) There is no reason to block all ICMP traffic. ICMP contains many important characteristics like troubleshooting (pings) or allowing a network to properly function. 
+
+For example ICMP bloking would mean blocking ping traffic inside your network which will make troubleshooting extremely complicated. Another side effect of ICMP blocking would be PMTUD(Path MTU Discovery) that allows to hosts to adjust their MSS value to one that fits in the smallest MTU along the path between two hosts. Therefore, if two hosts have a smaller MTU than the local link on the path between them and there will be no way to understand this, then the traffic will be black-holed.
