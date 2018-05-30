@@ -1,4 +1,4 @@
-a) When the destination address of a packet is not matched by any of the rules of the routing table, then the packet will be sent through the default route containing a destionation address of 0.0.0.0/0.
+a) When the destination address of a packet is not matched by any of the rules of the routing table, then the packet will be sent through the default route containing a destination address of 0.0.0.0/0 and gateway the router.
 
 b) Route 9 indicates that all the packets with destination IP address 145.116.128.0/22 are on the same network as we are since there is no gateway and the packet is sent directly to the wlp3s0 interfaces. The absence of a gateway can be observed also from the G flag missing from the flags column. 
 
@@ -7,7 +7,7 @@ Route 4 and 3 are covering the same hosts but since route 4 is more specific tha
 Routes 5 - 6 will pass through the 145.116.128.1 gateway over the wlp3s0 interface. This is the IP address of the router itself. In these routes the G flag is present. The destination IP addresses per packet are different between routes 5-6. 
 Route 5 decribes the route for dest IP addresses 172.16.0.0/12 and Route 6 the route for dest IP addresses 192.168.0.0/16.
 
-c) Route 3 has no gateway so the packet will directly traverse to its destination over the tap0 interface. 
+c) Route 3 is overriding route 4 as stated in b) and enabling the packets with dest address 10.50.9.0/24 through the interface tap0.  
 
 d) Route 8 defines that packets with a destionation IP address 131.174.117.20 will traverse though the gateway 145.116.128.1 over the wlp3s0 interface. The destination IP address corrensponds to the DNS IP address as stated from the DHCP leases while the gateway matches the router ip address. Without route 8 no packets would be sent to the DNS through the router.    
 
