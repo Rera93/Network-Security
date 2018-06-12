@@ -1,0 +1,1 @@
+Besides the approach taken on exercise2a, the attacker can 2 additional attempts. Firsly, the attacker can try his luck by sending many attempts to the victim before the answer from the legitimate server is received by the victim. Secondly, the attacker can try to run a DoS attack on the real DNS server so it does not answer to a DNS request. 
