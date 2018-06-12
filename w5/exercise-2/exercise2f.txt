@@ -1,0 +1,6 @@
+When we are a passive MitM it is possible to read all the traffic and therefore the MitM does not have to guess the QID, source port and 0x20 bit.
+The passive attacker has to keep track of the ongoing randomizations of QID, source port and 0x20 bit so the countermeasures are not completely useless. Still, the passive attacker monitoring the DNS traffic can circumvent these countermeasures at the end.
+
+
+
+
