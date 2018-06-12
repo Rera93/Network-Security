@@ -1,0 +1,1 @@
+An active MITM does not only monitor the DNS traffic but also interacts and makes changes to it. Because of this, the countermeasures to prevent guessing are obsolete. No matter content of the the QID, source port or 0x20 bit, an active MITM can always alter them.
