@@ -1,0 +1,1 @@
+QID is equivalent to 16-bit. Randomizing QID will result in 2^{16} possibilies. Since the attacker has the change to guess just once, the odds will be 1/(2^{16}). 
