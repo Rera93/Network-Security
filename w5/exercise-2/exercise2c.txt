@@ -1,0 +1,1 @@
+Adding source port randomization to the QID randomization will result into 2^{32} possiblities. Since the attacker has just one guess than the probability for the right guess would be 1/(2^{32}).
