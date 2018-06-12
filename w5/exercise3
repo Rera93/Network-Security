@@ -1,0 +1,3 @@
+The firewall configuration allowed all outgoing traffic and input traffic which has been established or related. Since the firewall remembers outgoing UDP packets based on (src IP address, dest IP address, src port, dest port) during the time-to-live (TTL) and recognizes the DNS responses, it will DNS traffic even though its a stateless protocol. 
+
+
